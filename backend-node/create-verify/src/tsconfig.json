@@ -17,6 +17,6 @@
   },
   "include": [
     "src/**/*",
-    "path/to/file.ts" // Add the file or directory path here
+    "./*" // Add the file or directory path here
   ]
 }

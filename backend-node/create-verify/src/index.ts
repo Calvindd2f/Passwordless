@@ -66,7 +66,7 @@ app.post('/users/login', async (req, res) => {
         process.env.PASSWORDLESS_SECRET as string,
         passwordlessOptions
     );
-    const verifiedToken: VerifiedUser = await passwordlessClient.verifyToken(signinRequest.token);
+    const verifiedToken: VerifiedUser | null = await passwordlessClient.verifyToken(signinRequest.token);
 
     if (!verifiedToken) {
         // if empty, invalid user
