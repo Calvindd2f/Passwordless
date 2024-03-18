@@ -32,6 +32,7 @@ const RequireAuth = ({ allowedRoles }) => {
         }
     }
 
+    // Do you want to redirect to a specific page or show an error message?
     return (
         isAllowed
             ? <Outlet />

@@ -12,17 +12,27 @@ export default function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // In case of self-hosting PASSWORDLESS_API_URL will be different than https://v4.passwordless.dev
         const passwordless = new Passwordless.Client({
             apiUrl: PASSWORDLESS_API_URL,
             apiKey: PASSWORDLESS_API_KEY
         });
         const yourBackendClient = new YourBackendClient()
+
+        // First we obtain our token
         const token = await passwordless.signinWithDiscoverable();
         if (!token) {
             return;
         }
+
+        // Then you verify on your backend the validity of the token.
         const verifiedToken = await yourBackendClient.signIn(token.token);
+        
+        // Your backend could return a JWT token for example if your token is deemed to be valid.
         localStorage.setItem('jwt', verifiedToken.jwt);
+        
+        // We are good to proceed. Otherwise fuck off.
         setAuth({ verifiedToken });
         setSuccess(true);
     }
@@ -50,8 +60,8 @@ export default function LoginPage() {
                         Need an Account?
                         <br />
                         <span className="line">
-              <a href="#">Sign Up</a>
-            </span>
+                            <button>Sign Up</button>
+                        </span>
                     </p>
                 </section>
             )}

@@ -29,6 +29,8 @@ export default function RegisterPage() {
         let registerToken = null;
         try {
             const yourBackendClient = new YourBackendClient();
+
+            // In our application we could for example store extra fields like firstName and lastName as well aside from username and the alias for our token.
             registerToken = await yourBackendClient.register(user, firstName, lastName, alias);
         }
         catch (error)
